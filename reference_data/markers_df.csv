@@ -1,0 +1,691 @@
+,source,target
+18,Pulmonary alveolar type II cells,ABCA3
+90,Enterocytes,ACSL5
+105,Smooth muscle cells,ACTA2
+113,Smooth muscle cells,ACTG2
+114,Myoepithelial cells,ACTG2
+115,Mesangial cells,ACTN1
+159,Beta cells,ADCYAP1
+172,Pulmonary alveolar type II cells,ADGRF5
+183,Endothelial cells,ADGRL4
+231,Goblet cells,AGR2
+233,Luminal epithelial cells,AGR2
+234,Cholangiocytes,AGR2
+239,Astrocytes,AGT
+255,Macrophages,AIF1
+256,Dendritic cells,AIF1
+259,Podocytes,AIF1L
+264,Proximal tubule cells,AK4
+267,Mesangial cells,AKAP12
+277,Acinar cells,AKR1C3
+281,Erythroid-like and erythroid precursor cells,ALAS2
+285,Hepatocytes,ALB
+289,Alpha cells,ALDH1A1
+304,Acinar cells,ALDOB
+326,Hepatocytes,AMBP
+328,Granulosa cells,AMH
+344,Mesangial cells,ANGPT2
+360,Oligodendrocytes,ANLN
+367,Acinar cells,ANPEP
+372,Enterocytes,ANPEP
+374,Dendritic cells,ANXA1
+375,Luminal epithelial cells,ANXA1
+398,Hepatocytes,APOA1
+402,Hepatocytes,APOA2
+413,Hepatocytes,APOC3
+416,Proximal tubule cells,APOE
+418,Astrocytes,APOE
+420,Hepatocytes,APOH
+445,Luminal epithelial cells,AQP3
+448,Keratinocytes,AQP3
+450,Gamma (PP) cells,AQP3
+451,Astrocytes,AQP4
+467,Enterocytes,AQP8
+495,Platelets,ARHGDIB
+505,Mesangial cells,ARID5B
+556,Proximal tubule cells,ASS1
+584,Neurons,ATP6V0A1
+634,B cells naive,BANK1
+645,Podocytes,BCAM
+655,Plasmacytoid dendritic cells,BCL11A
+656,B cells,BCL11A
+675,Neurons,BEX1
+676,Neurons,BEX2
+679,Smooth muscle cells,BGN
+680,Hepatic stellate cells,BGN
+691,B cells naive,BIRC3
+743,Luminal epithelial cells,BTG1
+759,Fibroblasts,C1S
+769,Macrophages,C5AR1
+776,Enterocytes,CA1
+835,Endothelial cells,CALCRL
+837,Mesangial cells,CALD1
+847,Neurons,CAMK2N1
+876,Endothelial cells,CAV1
+879,Adipocytes,CAVIN1
+880,Platelets,CAVIN2
+926,Hepatic stellate cells,CCL2
+946,NK cells,CCL4
+951,Gamma delta T cells,CCL5
+953,NK cells,CCL5
+955,Platelets,CCL5
+960,Hepatic stellate cells,CCN1
+962,Hepatic stellate cells,CCN2
+964,Fibroblasts,CCN2
+965,Endothelial cells,CCN2
+968,Podocytes,CCN2
+1064,T cells,CD2
+1069,NK cells,CD2
+1086,Epithelial cells,CD24
+1087,Cholangiocytes,CD24
+1092,Keratinocytes,CD24
+1096,Gamma delta T cells,CD247
+1103,Plasma cells,CD27
+1127,Endothelial cells,CD34
+1138,Macrophages,CD36
+1141,B cells naive,CD37
+1149,T cells,CD3D
+1153,T cells,CD3E
+1160,T cells,CD3G
+1204,T cells,CD52
+1205,B cells,CD52
+1206,B cells naive,CD52
+1222,B cells naive,CD69
+1232,NK cells,CD69
+1236,T cells,CD7
+1237,Gamma delta T cells,CD7
+1242,Plasma cells,CD74
+1243,B cells,CD74
+1244,Macrophages,CD74
+1245,Luminal epithelial cells,CD74
+1246,B cells naive,CD74
+1248,Plasma cells,CD79A
+1249,B cells naive,CD79A
+1250,B cells,CD79A
+1251,B cells naive,CD79B
+1252,B cells,CD79B
+1264,Macrophages,CD83
+1289,Luminal epithelial cells,CD9
+1290,Endothelial cells,CD9
+1303,Luminal epithelial cells,CDH1
+1316,Fibroblasts,CDH11
+1325,Enterocytes,CDH17
+1334,Endothelial cells,CDH5
+1383,Luminal epithelial cells,CEBPD
+1388,Acinar cells,CELA3A
+1389,Acinar cells,CELA3B
+1403,Ependymal cells,CFAP44
+1433,Alpha cells,CHGA
+1435,Enteroendocrine cells,CHGA
+1436,Enteroendocrine cells,CHGB
+1467,Ependymal cells,CIMAP1B
+1503,Oligodendrocytes,CLDN11
+1508,Pulmonary alveolar type II cells,CLDN18
+1514,Ductal cells,CLDN4
+1516,Cholangiocytes,CLDN4
+1518,Luminal epithelial cells,CLDN4
+1519,Endothelial cells,CLDN5
+1530,Endothelial cells,CLEC14A
+1536,T cells,CLEC2D
+1550,Macrophages,CLEC7A
+1551,Dendritic cells,CLEC7A
+1558,Podocytes,CLIC5
+1562,Acinar cells,CLPS
+1582,Gamma (PP) cells,CMTM8
+1592,Smooth muscle cells,CNN1
+1593,Oligodendrocyte progenitor cells,CNP
+1628,Pancreatic stellate cells,COL1A1
+1629,Fibroblasts,COL1A1
+1630,Hepatic stellate cells,COL1A1
+1634,Pancreatic stellate cells,COL1A2
+1635,Hepatic stellate cells,COL1A2
+1636,Fibroblasts,COL1A2
+1644,Fibroblasts,COL3A1
+1645,Hepatic stellate cells,COL3A1
+1646,Pancreatic stellate cells,COL3A1
+1648,Pancreatic stellate cells,COL4A1
+1665,Pancreatic stellate cells,COL6A1
+1667,Fibroblasts,COL6A2
+1668,Pancreatic stellate cells,COL6A2
+1669,Adipocytes,COL6A2
+1670,Fibroblasts,COL6A3
+1671,Pancreatic stellate cells,COL6A3
+1696,Acinar cells,CPA1
+1698,Acinar cells,CPA2
+1700,Mast cells,CPA3
+1702,Acinar cells,CPB1
+1703,Enteroendocrine cells,CPE
+1743,Germ cells,CREM
+1770,Alpha cells,CRYBA2
+1772,Proximal tubule cells,CRYL1
+1799,NK cells,CST7
+1800,Gamma delta T cells,CST7
+1823,Acinar cells,CTRB1
+1824,Acinar cells,CTRB2
+1825,Acinar cells,CTRC
+1832,Neutrophils,CTSG
+1833,Ductal cells,CTSH
+1838,Dendritic cells,CTSS
+1841,NK cells,CTSW
+1843,Gamma delta T cells,CTSW
+1860,Loop of Henle cells,CXCL1
+1877,Fibroblasts,CXCL14
+1878,Macrophages,CXCL16
+1882,Acinar cells,CXCL17
+1885,Pulmonary alveolar type II cells,CXCL2
+1907,Plasmacytoid dendritic cells,CXCR4
+1908,B cells,CXCR4
+1914,T cells,CXCR4
+1915,NK cells,CXCR4
+1932,Macrophages,CYBB
+1934,Plasma cells,CYCS
+1940,Leydig cells,CYP11A1
+1943,Leydig cells,CYP17A1
+1977,Clara cells,CYP4B1
+1993,Macrophages,DAB2
+1995,Podocytes,DACH1
+2013,Hepatic stellate cells,DCN
+2014,Fibroblasts,DCN
+2026,Serotonergic neurons,DDC
+2032,Germ cells,DDX4
+2055,Plasmacytoid dendritic cells,DERL3
+2068,Enterocytes,DGAT1
+2112,Beta cells,DLK1
+2180,Proximal tubule cells,DPP4
+2198,Ependymal cells,DRC12
+2224,Neurons,DYNC1I1
+2228,Germ cells,DYNLT1
+2235,Plasma cells,EAF2
+2247,Endothelial cells,ECSCR
+2270,Podocytes,EFNB1
+2282,Endothelial cells,EGFL7
+2298,Fibroblasts,EGR1
+2313,Neutrophils,ELANE
+2314,Neurons,ELAVL3
+2318,Cholangiocytes,ELF3
+2329,Endothelial cells,EMCN
+2340,Endothelial cells,EMP1
+2353,Endothelial cells,ENG
+2354,Ependymal cells,ENKUR
+2355,Neurons,ENO2
+2361,Proximal tubule cells,ENPEP
+2366,Oligodendrocytes,ENPP2
+2387,Endothelial cells,EPAS1
+2392,Erythroid-like and erythroid precursor cells,EPB42
+2395,Cholangiocytes,EPCAM
+2397,Epithelial cells,EPCAM
+2410,Oligodendrocyte progenitor cells,EPN2
+2429,Oligodendrocytes,ERMN
+2474,Alpha cells,F10
+2488,Enterocytes,FABP1
+2489,Enterocytes,FABP2
+2509,Proximal tubule cells,FAH
+2543,Proximal tubule cells,FBP1
+2577,Macrophages,FCGR3A
+2599,Serotonergic neurons,FEV
+2641,Gamma delta T cells,FGFBP2
+2647,Astrocytes,FGFR3
+2653,Hepatocytes,FGL1
+2670,Mesangial cells,FILIP1L
+2684,Mesangial cells,FLNA
+2692,Endothelial cells,FLT1
+2706,Pancreatic stellate cells,FN1
+2707,Mesangial cells,FN1
+2710,Proximal tubule cells,FOLR1
+2716,Fibroblasts,FOSB
+2745,Ependymal cells,FOXJ1
+2754,B cells naive,FOXP1
+2781,Fibroblasts,FSTL1
+2785,Dendritic cells,FTL
+2806,Alpha cells,FXYD5
+2824,Beta cells,G6PC2
+2890,Mesangial cells,GATA3
+2906,Alpha cells,GC
+2909,Alpha cells,GCG
+2910,Enteroendocrine cells,GCG
+2926,Ductal cells,GDF15
+2928,Acinar cells,GDF15
+2935,Loop of Henle cells,GEM
+2941,Astrocytes,GFAP
+2957,Enteric glia cells,GFRA3
+2960,Peri-islet Schwann cells,GFRA3
+2989,Leydig cells,GJA1
+2990,Astrocytes,GJA1
+3001,Oligodendrocytes,GJB1
+3016,Beta cells,GJD2
+3036,Proximal tubule cells,GLYAT
+3051,Platelets,GNG11
+3052,Endothelial cells,GNG11
+3062,Plasma cells,GNG7
+3069,NK cells,GNLY
+3070,Gamma delta T cells,GNLY
+3074,Podocytes,GOLIM4
+3094,Gamma (PP) cells,GPC5-AS1
+3105,Macrophages,GPNMB
+3121,Plasmacytoid dendritic cells,GPR183
+3129,Oligodendrocyte progenitor cells,GPR37L1
+3131,Astrocytes,GPR37L1
+3145,Platelets,GPX1
+3189,Fibroblasts,GSN
+3190,Acinar cells,GSTA1
+3194,Acinar cells,GSTA2
+3222,Erythroid-like and erythroid precursor cells,GYPB
+3223,Erythroid-like and erythroid precursor cells,GYPC
+3226,Gamma delta T cells,GZMA
+3227,NK cells,GZMA
+3229,T cytotoxic cells,GZMB
+3231,NK cells,GZMB
+3232,Plasmacytoid dendritic cells,GZMB
+3233,Gamma delta T cells,GZMB
+3235,NK cells,GZMH
+3277,Erythroid-like and erythroid precursor cells,HBB
+3322,Proximal tubule cells,HGD
+3333,Delta cells,HHEX
+3336,Luminal epithelial cells,HIF1A
+3340,Pericytes,HIGD1B
+3350,Platelets,HLA-A
+3351,Dendritic cells,HLA-A
+3352,Dendritic cells,HLA-B
+3353,Dendritic cells,HLA-C
+3354,Dendritic cells,HLA-DMA
+3361,Dendritic cells,HLA-DPA1
+3362,Dendritic cells,HLA-DPB1
+3368,Dendritic cells,HLA-DQB1
+3369,B cells naive,HLA-DQB1
+3372,B cells,HLA-DRA
+3374,Dendritic cells,HLA-DRA
+3376,Dendritic cells,HLA-DRB1
+3387,Luminal epithelial cells,HMGA1
+3411,Gamma delta T cells,HOPX
+3412,Beta cells,HOPX
+3414,Mesangial cells,HOPX
+3418,NK cells,HOPX
+3432,Adipocytes,HOXC9
+3442,Mast cells,HPGDS
+3462,Leydig cells,HSD17B3
+3491,Endothelial cells,HYAL2
+3493,Enteroendocrine cells,IAPP
+3494,Delta cells,IAPP
+3495,Beta cells,IAPP
+3515,Endothelial cells,ID1
+3517,Endothelial cells,ID3
+3523,Endothelial cells,IFI27
+3527,Monocytes,IFIT1
+3529,Monocytes,IFIT3
+3566,Fibroblasts,IGFBP6
+3568,Hepatic stellate cells,IGFBP6
+3569,Endothelial cells,IGFBP7
+3571,Hepatic stellate cells,IGFBP7
+3573,Plasma cells,IGHA1
+3575,Plasma cells,IGHA2
+3578,B cells naive,IGHD
+3581,Plasma cells,IGHG1
+3583,Plasma cells,IGHG2
+3584,Plasma cells,IGHG3
+3586,Plasma cells,IGHG4
+3590,B cells,IGHM
+3591,B cells naive,IGHM
+3592,B cells naive,IGKC
+3595,Plasma cells,IGKC
+3597,B cells,IGLC2
+3598,Plasma cells,IGLC2
+3600,Plasma cells,IGLC3
+3681,NK cells,IL2RG
+3683,T cells,IL32
+3724,T cells,IL7R
+3738,Granulosa cells,INHA
+3748,Beta cells,INS
+3750,Leydig cells,INSL3
+3780,Monocytes,IRF7
+3781,Plasmacytoid dendritic cells,IRF7
+3783,Plasmacytoid dendritic cells,IRF8
+3803,Delta cells,ISL1
+3806,Beta cells,ISL1
+3844,Mesangial cells,ITGA8
+3870,Macrophages,ITGAX
+3904,Goblet cells,ITLN1
+3906,Plasmacytoid dendritic cells,ITM2C
+3927,Plasma cells,JCHAIN
+3928,Plasmacytoid dendritic cells,JCHAIN
+3934,T cells,JUNB
+4027,Mast cells,KIT
+4054,Enterocytes,KLF5
+4056,Fibroblasts,KLF6
+4067,Acinar cells,KLK1
+4087,Gamma delta T cells,KLRD1
+4089,NK cells,KLRD1
+4090,Gamma delta T cells,KLRF1
+4102,Keratinocytes,KRT10
+4105,Keratinocytes,KRT14
+4112,Keratinocytes,KRT15
+4113,Basal cells,KRT15
+4119,Keratinocytes,KRT17
+4123,Mammary epithelial cells,KRT18
+4124,Luminal epithelial cells,KRT18
+4127,Cholangiocytes,KRT19
+4128,Mammary epithelial cells,KRT19
+4129,Ductal cells,KRT19
+4130,Luminal epithelial cells,KRT19
+4134,Enterocytes,KRT20
+4146,Mammary epithelial cells,KRT5
+4148,Keratinocytes,KRT5
+4149,Basal cells,KRT5
+4152,Ductal cells,KRT7
+4156,Mammary epithelial cells,KRT7
+4164,Mammary epithelial cells,KRT8
+4166,Luminal epithelial cells,KRT8
+4195,Basal cells,LAMB3
+4206,Pulmonary alveolar type II cells,LAMP3
+4218,T cells,LCK
+4220,Luminal epithelial cells,LCN2
+4224,Cholangiocytes,LCN2
+4252,Acinar cells,LGALS2
+4256,Macrophages,LGALS3
+4258,Dendritic cells,LGALS3
+4261,Cholangiocytes,LGALS4
+4274,Leydig cells,LHCGR
+4296,Plasmacytoid dendritic cells,LILRA4
+4304,B cells naive,LINC00926
+4321,Smooth muscle cells,LMOD1
+4339,Pulmonary alveolar type II cells,LPCAT1
+4348,Adipocytes,LRP1
+4350,Proximal tubule cells,LRP2
+4377,Dendritic cells,LST1
+4384,B cells naive,LTB
+4386,T cells,LTB
+4402,Fibroblasts,LUM
+4425,Neutrophils,LYZ
+4430,Dendritic cells,MACROH2A1
+4434,Macrophages,MAF
+4437,Podocytes,MAFB
+4438,Alpha cells,MAFB
+4440,Beta cells,MAFB
+4447,Oligodendrocytes,MAG
+4452,Podocytes,MAGI2
+4458,Enterocytes,MAOA
+4464,Mesangial cells,MAP3K20
+4466,Platelets,MAP3K7CL
+4502,Oligodendrocytes,MBP
+4508,Pericytes,MCAM
+4528,Mesangial cells,MEF2C
+4531,Neurons,MEG3
+4533,Beta cells,MEG3
+4559,Adipocytes,METRN
+4561,Adipocytes,METRNL
+4569,Pericytes,MFGE8
+4578,Fibroblasts,MGP
+4579,Pancreatic stellate cells,MGP
+4580,Endothelial cells,MGP
+4624,Fibroblasts,MMP2
+4626,Adipocytes,MMP2
+4636,Ductal cells,MMP7
+4652,Oligodendrocytes,MOG
+4661,Neutrophils,MPO
+4678,Germ cells,MRPL14
+4684,B cells naive,MS4A1
+4690,Macrophages,MS4A4A
+4695,Macrophages,MS4A7
+4703,Mesothelial cells,MSLN
+4707,Smooth muscle cells,MSRB3
+4716,Adipocytes,MT2A
+4721,Luminal epithelial cells,MUC1
+4725,Pulmonary alveolar type II cells,MUC1
+4726,Clara cells,MUC1
+4727,Acinar cells,MUC1
+4730,Goblet cells,MUC13
+4739,Goblet cells,MUC2
+4760,Monocytes,MX1
+4780,Smooth muscle cells,MYH11
+4802,Smooth muscle cells,MYL9
+4804,Myoepithelial cells,MYL9
+4805,Hepatic stellate cells,MYL9
+4806,Mesangial cells,MYL9
+4807,Peritubular myoid cells,MYL9
+4811,Smooth muscle cells,MYLK
+4814,Myoepithelial cells,MYLK
+4820,Adipocytes,MYO1C
+4828,Neurons,MYO5A
+4839,Oligodendrocytes,MYRF
+4840,Plasmacytoid dendritic cells,MZB1
+4842,Plasma cells,MZB1
+4856,Pulmonary alveolar type II cells,NAPSA
+4876,Platelets,NCOA4
+4901,Neurons,NEFM
+4915,Gamma (PP) cells,NEUROD1
+4919,Alpha cells,NEUROD1
+4920,Beta cells,NEUROD1
+4964,Endothelial cells,NHERF2
+4969,Plasmacytoid dendritic cells,NIBAN3
+4984,Gamma delta T cells,NKG7
+4986,NK cells,NKG7
+4989,Pulmonary alveolar type II cells,NKX2-1
+4994,Beta cells,NKX2-2
+5002,Beta cells,NKX6-1
+5054,Smooth muscle cells,NOTCH3
+5058,Pericytes,NOTCH3
+5069,Podocytes,NPHS1
+5070,Podocytes,NPHS2
+5087,Beta cells,NPTX2
+5097,Adipocytes,NQO1
+5128,Germ cells,NR6A1
+5137,Platelets,NRGN
+5151,Macrophages,NRP2
+5207,Monocytes,OAS1
+5215,Germ cells,ODF2
+5221,Acinar cells,OLFM4
+5231,Oligodendrocyte progenitor cells,OLIG1
+5253,Hepatocytes,ORM1
+5267,Platelets,OST4
+5466,Beta cells,PAX6
+5484,Endothelial cells,PCAT19
+5495,Proximal tubule cells,PCK1
+5513,Beta cells,PCSK1
+5515,Delta cells,PCSK1
+5519,Beta cells,PCSK2
+5520,Alpha cells,PCSK2
+5564,Oligodendrocyte progenitor cells,PDGFRA
+5567,Mesangial cells,PDGFRB
+5570,Pericytes,PDGFRB
+5589,Beta cells,PDX1
+5594,Proximal tubule cells,PDZK1
+5595,Acinar cells,PDZK1IP1
+5600,Endothelial cells,PECAM1
+5609,Alpha cells,PEMT
+5619,Ductal cells,PERP
+5620,Oligodendrocytes,PEX5L
+5622,Platelets,PF4
+5631,Pulmonary alveolar type II cells,PGC
+5633,Germ cells,PGK2
+5648,Goblet cells,PHGR1
+5667,Cholangiocytes,PIGR
+5669,Pulmonary alveolar type II cells,PIGR
+5711,Acinar cells,PLA2G1B
+5755,Oligodendrocytes,PLLP
+5757,Smooth muscle cells,PLN
+5758,Podocytes,PLOD2
+5759,Oligodendrocytes,PLP1
+5762,Monocytes,PLSCR1
+5774,Astrocytes,PLXNB1
+5785,Neurons,PNISR
+5786,Acinar cells,PNLIP
+5806,Podocytes,PODXL
+5845,Enterocytes,PPARG
+5852,Platelets,PPBP
+5854,Platelets,PPDPF
+5872,Gamma (PP) cells,PPY
+5887,Gamma delta T cells,PRF1
+5924,Germ cells,PRM1
+5926,Germ cells,PRM2
+5963,Acinar cells,PRSS1
+5966,Acinar cells,PRSS2
+5969,Acinar cells,PRSS3
+5973,Neutrophils,PRTN3
+5978,Monocytes,PSAP
+5990,Plasmacytoid dendritic cells,PTCRA
+5995,Leydig cells,PTGDS
+6003,Oligodendrocytes,PTGDS
+6019,Loop of Henle cells,PTGS2
+6025,Podocytes,PTH1R
+6032,Mesangial cells,PTN
+6041,T memory cells,PTPRC
+6043,Dendritic cells,PTPRC
+6044,Monocytes,PTPRC
+6054,Podocytes,PTPRO
+6236,Acinar cells,RARRES2
+6271,Delta cells,RBP4
+6273,Macrophages,RBPJ
+6285,Acinar cells,REG1A
+6286,Acinar cells,REG1B
+6287,Acinar cells,REG3A
+6321,Mast cells,RGS13
+6331,Platelets,RGS18
+6379,Acinar cells,RNASE1
+6380,Endothelial cells,RNASE1
+6410,Mesangial cells,ROCK1
+6433,Germ cells,RSBN1L
+6437,Mesothelial cells,RSPO1
+6462,Endothelial cells,S100A10
+6463,Ductal cells,S100A10
+6465,Endothelial cells,S100A13
+6467,Keratinocytes,S100A14
+6469,NK cells,S100A4
+6470,T cells,S100A4
+6471,Macrophages,S100A4
+6472,Fibroblasts,S100A4
+6474,Dendritic cells,S100A4
+6476,Neutrophils,S100A4
+6493,Neutrophils,S100A8
+6495,Monocytes,S100A9
+6496,Dendritic cells,S100A9
+6505,Astrocytes,S100B
+6506,Enteric glia cells,S100B
+6551,Clara cells,SCGB1A1
+6555,Beta cells,SCGB2A1
+6556,Gamma (PP) cells,SCGB2A1
+6557,Alpha cells,SCGB2A1
+6558,Clara cells,SCGB3A1
+6561,Clara cells,SCGB3A2
+6562,Enteroendocrine cells,SCGN
+6563,Alpha cells,SCGN
+6564,Gamma (PP) cells,SCGN
+6565,Delta cells,SCGN
+6566,Beta cells,SCGN
+6612,Plasma cells,SDC1
+6635,B cells naive,SELL
+6653,Oligodendrocytes,SEMA4D
+6667,Hepatocytes,SERPINA1
+6674,Neutrophils,SERPINB1
+6676,Luminal epithelial cells,SERPINB3
+6687,Plasmacytoid dendritic cells,SERPINF1
+6690,Proximal tubule cells,SERPINF2
+6694,Fibroblasts,SERPINH1
+6703,Pancreatic stellate cells,SFRP2
+6709,Pulmonary alveolar type II cells,SFTA2
+6710,Clara cells,SFTPA1
+6711,Pulmonary alveolar type II cells,SFTPA1
+6713,Pulmonary alveolar type II cells,SFTPB
+6714,Pulmonary alveolar type II cells,SFTPC
+6715,Clara cells,SFTPC
+6717,Pulmonary alveolar type II cells,SFTPD
+6733,Mesangial cells,SH3BGRL
+6823,Neurons,SLC12A5
+6826,Proximal tubule cells,SLC13A1
+6851,Retinal ganglion cells,SLC17A6
+6879,Astrocytes,SLC1A2
+6882,Astrocytes,SLC1A3
+6911,Erythroid-like and erythroid precursor cells,SLC25A37
+6923,Enterocytes,SLC26A3
+6950,Beta cells,SLC30A8
+6951,Alpha cells,SLC30A8
+6960,Proximal tubule cells,SLC34A1
+6961,Pulmonary alveolar type II cells,SLC34A2
+6979,Enterocytes,SLC39A5
+6999,Proximal tubule cells,SLC4A4
+7003,Enterocytes,SLC51B
+7013,Proximal tubule cells,SLC5A8
+7017,Astrocytes,SLC6A11
+7060,Luminal epithelial cells,SLPI
+7061,Ductal cells,SLPI
+7082,Germ cells,SMCP
+7086,Alpha cells,SMIM24
+7094,Leydig cells,SMOC2
+7101,Neurons,SNAP25
+7104,Erythroid-like and erythroid precursor cells,SNCA
+7107,Smooth muscle cells,SNCG
+7126,Smooth muscle cells,SOD3
+7181,Pancreatic stellate cells,SPARC
+7182,Endothelial cells,SPARC
+7183,Platelets,SPARC
+7184,Fibroblasts,SPARC
+7185,Hepatic stellate cells,SPARC
+7186,Endothelial cells,SPARCL1
+7216,Acinar cells,SPINK1
+7220,Goblet cells,SPINK4
+7233,Gamma delta T cells,SPON2
+7234,Fibroblasts,SPON2
+7259,Podocytes,SRGAP1
+7262,Endothelial cells,SRGN
+7263,Platelets,SRGN
+7271,Plasma cells,SSR4
+7273,Delta cells,SST
+7276,Enteroendocrine cells,SST
+7282,Oligodendrocytes,ST18
+7305,Fibroblasts,STAT3
+7307,Adipocytes,STAT6
+7321,Neurons,STMN2
+7359,Acinar cells,SYCN
+7369,Astrocytes,SYNE1
+7373,Podocytes,SYNPO
+7384,Beta cells,SYT13
+7404,Ductal cells,TACSTD2
+7464,Podocytes,TCF21
+7466,Plasmacytoid dendritic cells,TCF4
+7475,B cells naive,TCL1A
+7503,Oligodendrocytes,TF
+7511,Adipocytes,TFE3
+7521,Goblet cells,TFF3
+7524,Cholangiocytes,TFF3
+7541,Endothelial cells,TGFBR2
+7560,Loop of Henle cells,THBS1
+7572,Podocytes,THSD7A
+7574,Pancreatic stellate cells,THY1
+7588,Endothelial cells,TIMP3
+7589,Pancreatic stellate cells,TIMP3
+7628,Endothelial cells,TM4SF1
+7632,Alpha cells,TM4SF4
+7682,Oligodendrocytes,TMEM63A
+7703,Pancreatic stellate cells,TNFAIP6
+7714,B cells naive,TNFRSF13C
+7717,Plasma cells,TNFRSF17
+7733,Luminal epithelial cells,TNFSF10
+7755,Germ cells,TNP1
+7757,Oligodendrocyte progenitor cells,TNR
+7787,Mesangial cells,TPM2
+7788,Hepatic stellate cells,TPM2
+7793,Mast cells,TPSAB1
+7794,Mast cells,TPSB2
+7797,T cells,TRAC
+7798,T cytotoxic cells,TRAC
+7811,T cells,TRBC2
+7813,Gamma delta T cells,TRDC
+7828,Macrophages,TREM2
+7850,Podocytes,TRIB2
+7909,Adipocytes,TSPO
+7935,Alpha cells,TTR
+7937,Hepatocytes,TTR
+7965,Macrophages,TYROBP
+8019,Oligodendrocyte progenitor cells,VCAN
+8038,Podocytes,VEGFA
+8047,Enterocytes,VIL1
+8052,Fibroblasts,VIM
+8053,Pericytes,VIM
+8064,B cells naive,VPREB3
+8065,B cells,VPREB3
+8070,Macrophages,VSIG4
+8072,Neurons,VSNL1
+8086,Mast cells,VWA5A
+8092,Endothelial cells,VWF
+8101,Luminal epithelial cells,WFDC2
+8102,Ductal cells,WFDC2
+8129,Podocytes,WT1
+8197,Ependymal cells,ZMYND10

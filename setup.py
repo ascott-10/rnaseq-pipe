@@ -1,26 +1,186 @@
-# python_scripts/codes/process_adata.py
+# setup.py
 
-#### Libraries ###
+#### Standard libraries ####
 import os
-import pandas as pd
+import sys
+import gzip
+import shutil
+
+#### Scientific stack ####
 import numpy as np
+import pandas as pd
 import scanpy as sc
-import scipy.sparse as sp  
+import seaborn as sns
+import scipy.sparse as sp
 from scipy.sparse import csr_matrix
 from scipy.io import mmread
-import matplotlib.pyplot as plt
-import seaborn as sns
+import random
 
+#### Plotting ####
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import colorcet as cc
+
+#### Domain-specific ####
 import decoupler as dc
 
-# Plot defaults
-sc.set_figure_params(figsize=(3, 3), frameon=False)
-
-# Project configuration (paths, constants, etc.)
+#### Custom ####
 from config import *
+#### Environmet Setup ####
+
+# ---- globals ----
+GENE_COLOR_MAP = {"None": "#d3d3d3"}
+CELL_TYPE_COLORS = {}
+GENE_COLOR_INDEX = 0
 
 
-def add_list_to_config(list_name, list_values, config_path="python_scripts/config.py"):
+def make_color_map(items, fallback="#d3d3d3", palette="glasbey_light"):
+    """
+    Assign shuffled colors from a palette to items.
+    Global state: GENE_COLOR_MAP, GENE_COLOR_INDEX
+    """
+    global GENE_COLOR_INDEX
+
+    if palette in cc.palette:
+        all_colors = list(cc.palette[palette])
+    else:
+        all_colors = list(getattr(cc, palette))
+
+    random.seed(42)  # reproducible
+    random.shuffle(all_colors)
+
+    for g in items:
+        if g not in GENE_COLOR_MAP:
+            GENE_COLOR_MAP[g] = all_colors[GENE_COLOR_INDEX % len(all_colors)]
+            GENE_COLOR_INDEX += 1
+
+    # always enforce defaults
+    GENE_COLOR_MAP["None"] = "#d3d3d3"
+    GENE_COLOR_MAP["CTCFL"] = "#04531c"
+    GENE_COLOR_MAP["CTCF"] = "#4b11d3"
+
+    return {g: GENE_COLOR_MAP[g] for g in items}
+
+
+def init_color_maps(genes=None, markers_file_path=MARKERS_FILE_PATH, adata=None):
+    """
+    Initialize gene and cell-type color maps.
+    """
+    global GENE_COLOR_MAP, CELL_TYPE_COLORS
+
+    if genes:
+        make_color_map(genes)
+
+    # get cell types from markers
+    if os.path.exists(markers_file_path):
+        cells_df = pd.read_csv(markers_file_path)
+        cell_types = list(cells_df["source"].unique())
+    else:
+        cell_types = []
+
+    # add from AnnData obs
+    if adata is not None and "predicted_cell_type" in adata.obs:
+        obs_types = list(adata.obs["predicted_cell_type"].cat.categories)
+        cell_types = sorted(set(cell_types + obs_types))
+
+    CELL_TYPE_COLORS = make_color_map(cell_types)
+
+    # add defaults
+    CELL_TYPE_COLORS["None"] = "#d3d3d3"
+    CELL_TYPE_COLORS["BORIS marker"] = "#dd6c0f"
+
+    for g in ["CTCF", "CTCFL"]:
+        if g in GENE_COLOR_MAP:
+            GENE_COLOR_MAP[f"{g}_pos"] = GENE_COLOR_MAP[g]   # positive = same as base
+            GENE_COLOR_MAP[f"{g}_neg"] = "#d3d3d3"           # negative always grey
+
+    return GENE_COLOR_MAP, CELL_TYPE_COLORS
+
+# Expand gene map to include _pos/_neg keys
+
+
+#### Project Setup ####
+
+#### Project Setup ####
+
+def directory_setup(projects=None):
+    """
+    Create required directory structure for one or more projects.
+
+    Usage:
+        python main.py setup [project_name ...]
+        If no project_name given, all projects from PROJECTS in config are used.
+    """
+    if projects is None:
+        projects = list(PROJECTS.keys())
+
+    # references directory
+    if not os.path.exists(REFERENCE_DIR):
+        os.makedirs(REFERENCE_DIR)
+        print(f"[NEW] {REFERENCE_DIR}")
+    else:
+        print(f"[SKIP] {REFERENCE_DIR}")
+
+    for project in projects:
+        if project not in PROJECTS:
+            print(f"[WARN] Unknown project: {project}, skipping")
+            continue
+
+        project_dir = os.path.join(BASE_DIR, project)
+
+        new_dirs = [
+            os.path.join(project_dir, RAW_DATA_DIR),
+            os.path.join(project_dir, WORKING_DATA_DIR),
+            os.path.join(project_dir, FIGURES_DIR),
+            os.path.join(project_dir, TABLES_DIR),
+        ]
+
+        for d in new_dirs:
+            if not os.path.exists(d):
+                os.makedirs(d)
+                print(f"[NEW] {d}")
+            else:
+                print(f"[SKIP] {d}")
+
+
+def set_active_project(project_name):
+    """
+    Activate a project: return its directories, raw_file_type, and markers_file_path.
+    Falls back to global MARKERS_FILE_PATH if not provided for the project.
+    """
+    if project_name not in PROJECTS:
+        raise ValueError(f"Unknown project: {project_name}. Must be one of {list(PROJECTS.keys())}")
+
+    raw_data_dir = os.path.join(BASE_DIR, project_name, RAW_DATA_DIR)
+    working_adata_dir = os.path.join(BASE_DIR, project_name, WORKING_DATA_DIR)
+    figures_dir = os.path.join(BASE_DIR, project_name, FIGURES_DIR)
+    tables_dir = os.path.join(BASE_DIR, project_name, TABLES_DIR)
+
+    raw_file_type = PROJECTS[project_name]["raw_file_type"]
+    markers_file_path = PROJECTS[project_name].get("markers_file_path", MARKERS_FILE_PATH)
+
+    return raw_data_dir, working_adata_dir, figures_dir, tables_dir, raw_file_type, markers_file_path
+
+
+
+#### Raw Data Setup ####
+
+def detect_compressed_files(raw_data_dir):
+    """
+    The function will detect and decompress .gz files in the given directory.
+
+    Usage: detect_compressed_files(RAW_DATA_DIR)
+    """
+    for fname in os.listdir(raw_data_dir):
+        full = os.path.join(raw_data_dir, fname)
+        if fname.endswith(".gz"):
+            with gzip.open(full, "rb") as f_in:
+                with open(full[:-3], "wb") as f_out:
+                    shutil.copyfileobj(f_in, f_out)
+            os.remove(full)
+
+
+def add_list_to_config(list_name, list_values, config_path="config.py"):
 
     # read file
     with open(config_path, "r") as f:
@@ -39,142 +199,66 @@ def add_list_to_config(list_name, list_values, config_path="python_scripts/confi
     print(f"set {list_name} in config.py")
 
 
+
+
+
+
+
 def gene_name_to_ensembl(adata):
-    #Make the gene_id as the gene index
+    """
+    Normalize gene annotations and set var_names to HGNC symbols.
+    Preserves ensembl_id and hgnc_symbol, freezes counts into raw.
+    """
+    # keep hgnc_symbol + ensembl_id
     adata.var["hgnc_symbol"] = adata.var["gene_id"].astype(str)
-    adata.var = adata.var[["ensembl_id", "hgnc_symbol"]] #preserve onlyy hgnc and ensembl id
-    adata.var_names = adata.var["hgnc_symbol"] #Use symbols as var_names
+    adata.var = adata.var[["ensembl_id", "hgnc_symbol"]]
+    adata.var_names = adata.var["hgnc_symbol"]
     adata.var_names_make_unique()
-    adata.var.index.name = None #make sure the index name does NOT clash with a column name
+    adata.var.index.name = None
 
-    #Freeze counts into a permanent raw layer
+    # freeze counts
     adata.layers["counts"] = adata.X.copy()
-    adata.raw = adata.copy() #stores frozen snapshot of counts and metadata for plotting marker genes after normalizaion
+    adata.raw = adata.copy()
 
-    # Check
     print(adata)
     print("var head:\n", adata.var.head())
 
-        # ---- Optional: adopt 'feature_name' as var_names if available
+    # optional: adopt 'feature_name'
     if "feature_name" in adata.var.columns:
         adata.var["ensembl_id"] = adata.var_names.astype(str)
         adata.var_names = adata.var["feature_name"].astype(str)
-        # avoid write-time collisions
         adata.var.drop(columns=["feature_name"], inplace=True)
+
+    # tidy indices
     adata.var.index.name = None
     if adata.raw is not None and adata.raw.var is not None:
         adata.raw.var.index.name = None
 
-
     return adata
 
 
-def make_markers_df(markers_file_path = MARKERS_FILE_PATH):
-    """Usage: markers_df = make_markers_df()"""
-    markers_file_path = "/vf/users/scottaa/human_fetal_gonad_rnaseq/results/tables/markers_df.csv"
+def make_markers_df(markers_file_path=MARKERS_FILE_PATH):
+    """
+    Load or build a markers dataframe.
+    Returns df with columns: source (cell type), target (gene).
+    """
     if os.path.exists(markers_file_path):
-        markers_df = pd.read_csv(markers_file_path, index_col = 0)
+        markers_df = pd.read_csv(markers_file_path, index_col=0)
     else:
-
         markers = dc.op.resource("PanglaoDB", organism="human")
-        # Filter by canonical_marker and human
         markers = markers[
-        markers["human"].astype(bool)
-        & markers["canonical_marker"].astype(bool)
-        & (markers["human_sensitivity"].astype(float) > 0.5)
+            markers["human"].astype(bool)
+            & markers["canonical_marker"].astype(bool)
+            & (markers["human_sensitivity"].astype(float) > 0.5)
         ]
-
-        # Remove duplicated entries
         markers = markers[~markers.duplicated(["cell_type", "genesymbol"])]
-
-        # Format
         markers = markers.rename(columns={"cell_type": "source", "genesymbol": "target"})
         markers = markers[["source", "target"]]
 
         markers_df = pd.DataFrame(markers)
+        markers_df.to_csv(markers_file_path)
 
-        print(markers_df)
-
-        markers_df.to_csv(os.path.join("/vf/users/scottaa/human_fetal_gonad_rnaseq/results/tables","markers_df.csv"))
-    
     return markers_df
-
-
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-
-import os
-import pandas as pd
-import colorcet as cc
-
-import colorcet as cc
-
-import random
-
-# utils.py
-import os
-import pandas as pd
-import colorcet as cc
-
-# ---- global state ----
-GENE_COLOR_MAP = {"None": "#d3d3d3"}
-CELL_TYPE_COLORS = {}
-GENE_COLOR_INDEX = 0
-
-GENE_COLOR_MAP = {"None": "#d3d3d3"}
-GENE_COLOR_INDEX = 0
-
-def make_color_map(items, fallback="#d3d3d3", palette="glasbey_light"):
-    global GENE_COLOR_INDEX
-    if palette in cc.palette:
-        all_colors = list(cc.palette[palette])
-    else:
-        all_colors = list(getattr(cc, palette))
-
-    random.seed(42)  # ensure reproducibility across runs
-    random.shuffle(all_colors)  # shuffle once per call
-
-    for g in items:
-        if g not in GENE_COLOR_MAP:
-            GENE_COLOR_MAP[g] = all_colors[GENE_COLOR_INDEX % len(all_colors)]
-            GENE_COLOR_INDEX += 1
-
-    # Always ensure fallback
-    GENE_COLOR_MAP["None"] = "#d3d3d3"
-    GENE_COLOR_MAP["CTCFL"] = "#04531c"
-    GENE_COLOR_MAP["CTCF"]  = "#4b11d3"
-
-    return {g: GENE_COLOR_MAP[g] for g in items}
-
-def init_color_maps(genes=None, markers_file_path=MARKERS_FILE_PATH, adata=None):
-    global GENE_COLOR_MAP, CELL_TYPE_COLORS
-
-    if genes:
-        make_color_map(genes)
-
-    # Start with markers file if it exists
-    if os.path.exists(markers_file_path):
-        cells_df = pd.read_csv(markers_file_path)
-        cell_types = list(cells_df["source"].unique())
-    else:
-        cell_types = []
-
-    # If an AnnData is provided, include its observed cell types
-    if adata is not None and "predicted_cell_type" in adata.obs:
-        obs_types = list(adata.obs["predicted_cell_type"].cat.categories)
-        cell_types = sorted(set(cell_types + obs_types))
-
-    CELL_TYPE_COLORS = make_color_map(cell_types)
-
-    # Always add defaults
-    CELL_TYPE_COLORS["None"] = "#d3d3d3"
-    CELL_TYPE_COLORS["BORIS marker"] = "#dd6c0f"
-
-    return GENE_COLOR_MAP, CELL_TYPE_COLORS
-
-
-
-
 def get_raw_gene_counts(adata, gene):
     # --- case 1: prefer raw ---
     if adata.raw is not None:
@@ -322,97 +406,3 @@ def get_cell_type(adata, markers_file_path=MARKERS_FILE_PATH, sample="sample"):
 
 
 
-def subset_adata(adata, sample, tables_dir):
-    outdir = os.path.join(tables_dir, "single_cell_analysis", sample)
-    os.makedirs(outdir, exist_ok=True)
-
-    # 1) Threshold on RAW only
-    CTCFL_vals = get_raw_gene_counts(adata, "CTCFL")
-    pos_mask = CTCFL_vals > 0
-    neg_mask = ~pos_mask
-
-    # 2) Export from the SAME RAW layer
-    if adata.raw is None:
-        raise ValueError("adata.raw is None — cannot export raw count matrices.")
-    X_raw = adata.raw.X
-    var_names = adata.raw.var_names
-
-    # slice first, THEN densify (memory-safe, same output as before)
-    X_pos = X_raw[pos_mask, :]
-    X_neg = X_raw[neg_mask, :]
-
-    if sp.issparse(X_pos):
-        X_pos = X_pos.toarray()
-    else:
-        X_pos = np.asarray(X_pos)
-
-    if sp.issparse(X_neg):
-        X_neg = X_neg.toarray()
-    else:
-        X_neg = np.asarray(X_neg)
-
-    df_pos = pd.DataFrame(X_pos, index=adata.obs_names[pos_mask], columns=var_names)
-    df_neg = pd.DataFrame(X_neg, index=adata.obs_names[neg_mask], columns=var_names)
-
-    #df_pos.to_csv(os.path.join(outdir, f"{sample}_CTCFL_pos.csv"))
-    #df_neg.to_csv(os.path.join(outdir, f"{sample}_CTCFL_neg.csv"))
-
-    print(f"{sample}: {df_pos.shape[0]} CTCFL_pos cells and {df_neg.shape[0]} CTCFL_neg cells")
-
-def check_sources(adata,gene):
-
-    results = {"total_cells": adata.n_obs}
-
-    if "counts" in adata.layers and gene in adata.var_names:
-        expr = adata[:, gene].layers["counts"]
-        if sp.issparse(expr):
-            expr = expr.toarray().ravel()
-        results["counts"] = np.sum(expr > 0)
-
-    if adata.raw is not None and gene in adata.raw.var_names:
-        expr = adata.raw[:, gene].X
-        if sp.issparse(expr):
-            expr = expr.toarray().ravel()
-        results["raw"] = np.sum(expr > 0)
-
-    if gene in adata.var_names:
-        expr = adata[:, gene].X
-        if sp.issparse(expr):
-            expr = expr.toarray().ravel()
-        results["X"] = np.sum(expr > 0)
-    
-    gene_expr = get_raw_gene_counts(adata, gene)
-    pos_mask = gene_expr > 0
-    adata.obs[f"{gene}_expr"] = np.where(pos_mask, f"{gene}_pos", f"{gene}_neg")
-    adata.obs[f"{gene}_expr"] = adata.obs[f"{gene}_expr"].astype("category")
-
-    print(f"{pos_mask.sum()} / {adata.n_obs} cells {gene}_pos")
-    #print(results)
-
-    return pos_mask.sum(),adata.n_obs
-
-
-def show_examples(adata,gene, n=10):
-    rows = {}
-
-    # counts layer
-    if "counts" in adata.layers and gene in adata.var_names:
-        expr = adata[:, gene].layers["counts"]
-        expr = expr.toarray().ravel() if sp.issparse(expr) else expr.ravel()
-        rows["counts"] = expr[:n]
-
-    # raw slot
-    if adata.raw is not None and gene in adata.raw.var_names:
-        expr = adata.raw[:, gene].X
-        expr = expr.toarray().ravel() if sp.issparse(expr) else expr.ravel()
-        rows["raw"] = expr[:n]
-
-    # main matrix
-    if gene in adata.var_names:
-        expr = adata[:, gene].X
-        expr = expr.toarray().ravel() if sp.issparse(expr) else expr.ravel()
-        rows["X"] = expr[:n]
-
-    matrix = pd.DataFrame(rows)
-
-    print(matrix)

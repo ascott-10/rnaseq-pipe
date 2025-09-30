@@ -23,8 +23,8 @@ import gzip
 import shutil
 from codes.utils import make_markers_df, get_raw_gene_counts, get_cell_type, add_list_to_config
 
-def tf_scoring(adata, sample, tf_list = ["SMAD1", "SMAD2", "SMAD3", "SMAD4"], plot_yes = False):
-    os.makedirs(os.path.join(FIGURES_DIR, "collectri"), exist_ok=True)
+def tf_scoring(adata, sample, figures_dir, tf_list = ["SMAD1", "SMAD2", "SMAD3", "SMAD4"], plot_yes = False):
+    os.makedirs(os.path.join(figures_dir, "collectri"), exist_ok=True)
     
     
     """CollecTRI network
@@ -76,7 +76,7 @@ CollecTRI is a comprehensive resource containing a curated collection of TFs and
         # UMAP of TF gene expression + cell_type
         colors = list(tf_list) + ["cell_type"]
         sc.pl.umap(adata, color=colors, frameon=False, show=False)
-        plt.savefig(os.path.join(FIGURES_DIR, "collectri", f"{sample}_tfs_expression_umap.png"),
+        plt.savefig(os.path.join(figures_dir, "collectri", f"{sample}_tfs_expression_umap.png"),
                     bbox_inches="tight", pad_inches=0.1, dpi=300)
         plt.close()
 
@@ -91,7 +91,7 @@ CollecTRI is a comprehensive resource containing a curated collection of TFs and
             cmap="RdBu_r",
             show=False,
         )
-        plt.savefig(os.path.join(FIGURES_DIR, "collectri", f"{sample}_tfs_celltype_matrix.png"),
+        plt.savefig(os.path.join(figures_dir, "collectri", f"{sample}_tfs_celltype_matrix.png"),
                     bbox_inches="tight", pad_inches=0.1, dpi=300)
         plt.close()
 
@@ -107,7 +107,7 @@ CollecTRI is a comprehensive resource containing a curated collection of TFs and
             sources=top_tfs, targets=10, size_node=7, figsize=(8,5), s_cmap="Reds"
         )
         plt.setp(plt.gca().texts, fontsize=6)  # shrink labels (one-liner)
-        plt.savefig(os.path.join(FIGURES_DIR, "collectri", f"{sample}_cells_tfs_networks.png"),
+        plt.savefig(os.path.join(figures_dir, "collectri", f"{sample}_cells_tfs_networks.png"),
                     bbox_inches="tight", dpi=300)
         plt.close()
 
@@ -129,15 +129,15 @@ CollecTRI is a comprehensive resource containing a curated collection of TFs and
             show=False,
         )
         plt.gcf().set_size_inches(10, 4)
-        plt.savefig(os.path.join(FIGURES_DIR, "collectri", f"{sample}_umap_top_tf_with_legends.png"),
+        plt.savefig(os.path.join(figures_dir, "collectri", f"{sample}_umap_top_tf_with_legends.png"),
                     bbox_inches="tight", pad_inches=0.1, dpi=300)
         plt.close()
 
     return adata
 
-def pathway_scoring(adata, sample, path_list = ["NFkB", "TGFb", "Hypoxia"], plot_yes = False):
-    os.makedirs(os.path.join(FIGURES_DIR, "pathways"), exist_ok=True)
-    os.makedirs(os.path.join(FIGURES_DIR, "ctcfl"), exist_ok=True)
+def pathway_scoring(adata, sample, figures_dir, path_list = ["NFkB", "TGFb", "Hypoxia"], plot_yes = False):
+    os.makedirs(os.path.join(figures_dir, "pathways"), exist_ok=True)
+    os.makedirs(os.path.join(figures_dir, "CTCFL"), exist_ok=True)
     
     """PROGENy is a comprehensive resource that provides a curated collection of pathways and their target genes, along with weights for each interaction [SKK+18]. This collection is designed to infer pathway activities from gene expression data, allowing researchers to gain insights into the underlying signaling pathways that drive cellular behavior. PROGENy covers a wide range of pathways, including those involved in cancer, immune response, and development."""
 
@@ -172,7 +172,7 @@ def pathway_scoring(adata, sample, path_list = ["NFkB", "TGFb", "Hypoxia"], plot
             frameon=False,
             show=False,
         )
-        plt.savefig(os.path.join(FIGURES_DIR, "pathways", f"{sample}_pathways_umap.png"),
+        plt.savefig(os.path.join(figures_dir, "pathways", f"{sample}_pathways_umap.png"),
                     bbox_inches="tight", pad_inches=0.1, dpi=300)
         plt.close()
 
@@ -195,7 +195,7 @@ def pathway_scoring(adata, sample, path_list = ["NFkB", "TGFb", "Hypoxia"], plot
             cmap="RdBu_r",
             show=False,
         )
-        plt.savefig(os.path.join(FIGURES_DIR, "pathways", f"{sample}_pathways_matrix.png"),
+        plt.savefig(os.path.join(figures_dir, "pathways", f"{sample}_pathways_matrix.png"),
                     bbox_inches="tight", pad_inches=0.1, dpi=300)
         plt.close()
 
@@ -203,8 +203,8 @@ def pathway_scoring(adata, sample, path_list = ["NFkB", "TGFb", "Hypoxia"], plot
 
     return adata
 
-def hallmark_genesets(adata, sample, plot_yes = False):
-    os.makedirs(os.path.join(FIGURES_DIR, "genesets"), exist_ok=True)
+def hallmark_genesets(adata, sample, figures_dir, plot_yes = False):
+    os.makedirs(os.path.join(figures_dir, "genesets"), exist_ok=True)
     """Hallmark gene sets are curated collections of genes that represent specific, well-defined biological states or processes. They are part of MSigDB and were developed to reduce redundancy and improve interpretability compared to older, more overlapping gene set collections [LSP+11].
 
     A total of 50 gene sets are provided, designed to be non-redundant, concise, and biologically coherent."""
@@ -257,14 +257,14 @@ def hallmark_genesets(adata, sample, plot_yes = False):
             cmap="RdBu_r",
             show=False,
         )
-        plt.savefig(os.path.join(FIGURES_DIR, "genesets", f"{sample}_hallmark_genesets_matrix.png"),
+        plt.savefig(os.path.join(figures_dir, "genesets", f"{sample}_hallmark_genesets_matrix.png"),
                     bbox_inches="tight", pad_inches=0.1, dpi=300)
         plt.close()
 
     return adata
 
-def ctcfl_pathway_matrices(adata, sample):
-    os.makedirs(os.path.join(FIGURES_DIR, "ctcfl"), exist_ok=True)
+def ctcfl_pathway_matrices(adata, sample, figures_dir):
+    os.makedirs(os.path.join(figures_dir, "CTCFL"), exist_ok=True)
 
     # PROGENy scores (cells x pathways)
     if "score_ulm_progeny" in adata.obsm:
@@ -278,10 +278,10 @@ def ctcfl_pathway_matrices(adata, sample):
         adata.obsm["score_ulm_progeny"] = pw_df
         if "score_ulm" in adata.obsm: del adata.obsm["score_ulm"]
 
-    # split by labels in obs['ctcfl_expr']
-    lab = adata.obs["ctcfl_expr"].astype(str).str.lower()
-    pos = lab.isin(["ctcfl_pos", "pos", "positive", "ctcfl+"])
-    neg = lab.isin(["ctcfl_neg", "neg", "negative", "ctcfl-"])
+    # split by labels in obs['CTCFL_expr']
+    lab = adata.obs["CTCFL_expr"].astype(str).str.lower()
+    pos = lab.isin(["CTCFL_pos", "pos", "positive", "CTCFL+"])
+    neg = lab.isin(["CTCFL_neg", "neg", "negative", "CTCFL-"])
 
     # score-space AnnData
     s_pos = anndata.AnnData(X=pw_df.loc[pos].values,
@@ -300,7 +300,7 @@ def ctcfl_pathway_matrices(adata, sample):
         return adata
 
     # save matrices (ALL pathways)
-    pdir = os.path.join(FIGURES_DIR, "ctcfl")
+    pdir = os.path.join(figures_dir, "CTCFL")
     p_pos = os.path.join(pdir, f"{sample}_pathways_matrix_CTCFLpos.png")
     p_neg = os.path.join(pdir, f"{sample}_pathways_matrix_CTCFLneg.png")
 
@@ -317,6 +317,8 @@ def ctcfl_pathway_matrices(adata, sample):
                      cmap="RdBu_r", show=False)
     plt.savefig(p_neg, bbox_inches="tight", pad_inches=0.1, dpi=300); plt.close()
 
+    
+
     # side-by-side composite (PROGENy)
     import matplotlib.image as mpimg
     img1, img2 = mpimg.imread(p_pos), mpimg.imread(p_neg)
@@ -331,8 +333,8 @@ def ctcfl_pathway_matrices(adata, sample):
     return adata
 
 
-def ctcfl_geneset_matrices(adata, sample):
-    os.makedirs(os.path.join(FIGURES_DIR, "ctcfl"), exist_ok=True)
+def ctcfl_geneset_matrices(adata, sample, figures_dir):
+    os.makedirs(os.path.join(figures_dir, "CTCFL"), exist_ok=True)
 
     # Hallmark scores (cells x genesets)
     if "score_ulm_hallmark" in adata.obsm:
@@ -346,10 +348,10 @@ def ctcfl_geneset_matrices(adata, sample):
         adata.obsm["score_ulm_hallmark"] = hk_df
         if "score_ulm" in adata.obsm: del adata.obsm["score_ulm"]
 
-    # split by labels in obs['ctcfl_expr']
-    lab = adata.obs["ctcfl_expr"].astype(str).str.lower()
-    pos = lab.isin(["ctcfl_pos", "pos", "positive", "ctcfl+"])
-    neg = lab.isin(["ctcfl_neg", "neg", "negative", "ctcfl-"])
+    # split by labels in obs['CTCFL_expr']
+    lab = adata.obs["CTCFL_expr"].astype(str).str.lower()
+    pos = lab.isin(["CTCFL_pos", "pos", "positive", "CTCFL+"])
+    neg = lab.isin(["CTCFL_neg", "neg", "negative", "CTCFL-"])
 
     # score-space AnnData
     s_pos = anndata.AnnData(X=hk_df.loc[pos].values,
@@ -368,7 +370,7 @@ def ctcfl_geneset_matrices(adata, sample):
         return adata
 
     # save matrices (ALL genesets)
-    pdir = os.path.join(FIGURES_DIR, "ctcfl")
+    pdir = os.path.join(figures_dir, "CTCFL")
     p_pos = os.path.join(pdir, f"{sample}_genesets_matrix_CTCFLpos.png")
     p_neg = os.path.join(pdir, f"{sample}_genesets_matrix_CTCFLneg.png")
 

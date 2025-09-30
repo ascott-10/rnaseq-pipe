@@ -1,27 +1,35 @@
 # Purpose
 
-This collection of scripts acts as a pipeline for dealing with sc-RNAseq data. It assumes the user is working within the NIH Biowulf and conda environment.
+This repository contains a modular pipeline for processing and analyzing single-cell RNA-seq (scRNA-seq) data.  
+It is designed for use on **NIH Biowulf** with a conda environment but can be adapted to other HPC systems.  
 
-The very first steps involve initiating conda, creating a new environment and updating conda, which may or may not apply to all users. Next conda should be configured with bioconda and conda-forge. FInally, the user should install the basic packages as listed below from the conda environment
+
+---
 
 # Setup
 
-*** Setup the conda environment ***
+## 1. Conda environment
+
+```bash
     source myconda
     conda create --name rnaseq-pipe python=3.10
     conda update -n base -c conda-forge conda
     conda activate rnaseq-pipe
 
+    # configure channels
     conda config --add channels bioconda
     conda config --add channels conda-forge
     conda config --set channel_priority strict
 
+    # install core dependencies
     conda install pandas numpy matplotlib seaborn scanpy fast_matrix_market anndata
-    conda install scvi-tools -c conda-forge (for anndata/scvi-tools)
-    conda install -c conda-forge python-igraph (for igraph package)
+    conda install scvi-tools -c conda-forge         # anndata/scvi-tools support
+    conda install -c conda-forge python-igraph      # igraph support
     conda install conda-forge::scanpy 
-    conda install conda-forge::decoupler-py (NOTE THIS --> must be vers 2.1 or higher)
+    conda install conda-forge::decoupler-py         # must be v2.1 or higher
     conda install conda-forge::mudata
+    conda install -c conda-forge colorcet
+
     
 
 *** Setup the folder directories ***
@@ -33,40 +41,40 @@ The very first steps involve initiating conda, creating a new environment and up
 
     git config --global user.name "ascott-10"
     git config --global user.email "ascott10919@gmail.com"
-    git init # initialize git
-    git branch -m main # change main branch name to "main"
-    git add . # add files to staging
+
+    git init
+    git branch -m main
+    git add .
     git commit -m "Initial commit"
+    git remote add origin <your_repo_url>
     git push -u origin main --force
 
-    *Setup .gitignore
+```
+Add a .gitignore to exclude large files, results, and conda environments.
 
-# Scripts
+## 2. config.py setup
 
-    main.py will contain the main driver functions
-    utils.py will contain modular functions that will be used across multiple codes
-    process_data.py will contain the initial functions that process raw data into adata tables and perform initial QC and normalization
+The pipeline is designed to support the simulataneous analysis of multiple projects at once. The user should assign:
+- BASE_DIR
+- REFERENCE_DIR
+- MARKERS_FILE_PATH
+- PROJECT_FOLDERS
 
+in config.py before running `python main.py setup <project_name>`
 
+Analyses include preprocessing raw data, pseudobulk differential expression, transcription factor/pathway scoring,  
+and visualization of CTCFL expression.
 
-# Workflow
+## 3. Raw data
 
-The workflow begins with initial data, whether that be in preprocessed .h5 or in .mtx/genes/barcodes and then converts them to anndata tables. The adata tables can then be used for downstream expression analysis.
+User should put raw files in the appropriate raw file folder. The pipeline can analyze raw files in many formats including:
+- .h5
+- .mtx when it includes barcodes, genes, matrix.mtx
+- counts in ".csv", ".tsv", ".txt"
+- compressed file formats can be unzipped and handled as well
 
-The config file should be setup with the filepaths to the base folders (project, results, working adata). These can be customized.
+The raw files folder initially will contain the raw files, and from here the sample names will be extracted. Replicates can pose some challenges and the user may have to manually modify the names of replicates to get the exact names they want. 
 
-Raw files (h5) should be placed inside raw_data, and processed adata tables should be placed inside working_adata.
+The raw files folder will also contain the initial, unmodified adata table that is created from the raw files before any processing.
 
-
-## Step 1
-
-The user should upload the raw data files (in .h5, .mtx or .csv) into raw_data and update .config to indicate which file type. The user should then set the file paths and directories as appropriate. In the main function, the function detects sample names and if any files are compressed, they are then uncompressed before moving on. 
-
-## Step 2
-
-The main script iterates through the samples and creates adata tables and performs normalization, filtering and finds highly variable genes. It also assigns cell types if there aren't any and creates UMAPs highlighting cell types versus CTCFL expression (based on raw counts). These are printed to console; the figures are saved in results/figures/umap by default. 
-
-## Step 3
-
-For each sample, do TF and pathway scoring, CTCFL pathway and geneset matrices, Hallmark genesets. THe user can customize which transcription factors to focus and which pathways to focus on. The user should pay attention to where the plots will be saved and what their names are but generally everything will be saved under figures
 

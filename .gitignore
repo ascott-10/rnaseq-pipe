@@ -1,0 +1,66 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+pip-wheel-metadata/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Proect folders
+errors/
+logs/
+figures/
+projects/
+
+# Data outputs
+*.log
+*.tmp
+*.bak
+*.out
+*.err
+
+# Large data files
+*.csv
+*.tsv
+*.xlsx
+*.h5
+*.hdf5
+*.bam
+*.sam
+*.vcf
+*.bed
+*.fasta
+*.fa
+*.fastq
+*.fq
+
+# Archives
+*.zip
+*.tar
+*.gz
+*.bz2
+
+# Build artifacts
+build/
+dist/

@@ -1,0 +1,16 @@
+python==3.10
+
+numpy
+pandas
+matplotlib
+seaborn
+
+anndata
+scanpy
+scvi-tools
+fast_matrix_market
+
+python-igraph
+decoupler>=2.1
+mudata
+colorcet

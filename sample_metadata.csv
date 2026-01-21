@@ -1,0 +1,5 @@
+sample,donor_id,sex,age,FIGO_grade
+SAMEA6492740,38b,F,81,stage 3c
+SAMEA6492741,59,F,46,stage 3c
+SAMEA6492742,74-1,F,73,stage 3b
+SAMEA6492743,79,F,73,stage 3c
